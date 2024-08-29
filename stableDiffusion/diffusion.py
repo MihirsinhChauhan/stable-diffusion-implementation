@@ -3,7 +3,7 @@ from torch import nn
 from torch.nn import functional as F
 from attention import SelfAttention, CrossAttention
 
-class TimeEmbedding(nn.module):
+class TimeEmbedding(nn.Module):
     def __init__(self,n_embed:int):
         super().__init__()
         self.linear_1= nn.Linear(n_embed, 4 * n_embed)

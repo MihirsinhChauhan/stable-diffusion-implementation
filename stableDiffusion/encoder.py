@@ -38,10 +38,10 @@ class VAE_Encoder(nn.Sequential):
             nn.GroupNorm(32,512),
 
             # (Batch_size, 512,Height/8, Width/8) -> (Batch_size, 512, Height/8, Width/8)
-            nn.SiLU()
+            nn.SiLU(),
 
             # (Batch_size, 512,Height/8, Width/8) -> (Batch_size, 8, Height/8, Width/8)
-            nn.Conv2d(512, 8, kernel_size=1, stride=1, padding=0)
+            nn.Conv2d(512, 8, kernel_size=1, stride=1, padding=0),
 
             # (Batch_size, 8, Height/8, Width/8) -> (Batch_size, 8, Height/8, Width/8)
             nn.Conv2d(8, 8, kernel_size=1, stride=1, padding=0)
