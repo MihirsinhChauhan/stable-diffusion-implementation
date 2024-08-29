@@ -93,9 +93,9 @@ def generate(prompt: str, uncond_prompt:str, input_image=None,
         diffusion.to(device)
 
         timestemps = tqdm(sampler.timestemps)
-        for i, timestemp in enumerate(timestemps):
+        for i, timestep in enumerate(timestemps):
             # (1,320)
-            time_embedding = get_time_embedding(timestemp).to(device)
+            time_embedding = get_time_embedding(timestep).to(device)
 
             # (Batch_size, 4, Latent_height, Latents_width)
             model_input = latents
@@ -112,7 +112,7 @@ def generate(prompt: str, uncond_prompt:str, input_image=None,
                 model_ouput = cfg_scales*(cond_output - uncond_output) + uncond_output
 
             # Remove the noise predicted by the unet
-            latents = sampler.step(timestemp, latents, model_ouput)
+            latents = sampler.step(timestep, latents, model_ouput)
         to_idle(diffusion)
 
         decoder = models["decoder"]
